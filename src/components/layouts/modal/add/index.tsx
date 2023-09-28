@@ -41,8 +41,7 @@ const AddModal = ({ onClose, onSubmit }: any) => {
   return (
     <div ref={ref} className="p-[30px] bg-white md:min-w-[500px] w-full text-center rounded-[20px]">
       <div className="m-auto">
-        <p className="headline1 text-primary1">Add User</p>
-        <p className="body5 my-[20px]">Once you submit your work, you won't be able to make any edits. If you're certain, click 'Yes, I'm ready' to proceed.</p>
+        <p className="headline1 text-primary1 my-[20px]">Add User</p>
         <div className="flex w-full">
           <div className="text-left min-w-[150px]">
             <p className="min-h-[50px]">Username</p>
