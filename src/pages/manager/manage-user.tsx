@@ -119,14 +119,25 @@ const ManageUser = () => {
   const onSearch = () => {
     let result: any = null;
     if (input?.id && input?.username && role) {
-      const timTheoIdVaName = userList.filter((item: any) => item.id == input?.id && item.username == input?.username && item.role.toLowerCase() == role);
+      const timTheoIdVaName = userList.filter(
+        (item: any) =>
+          item.id == input?.id &&
+          item.username == input?.username &&
+          item.role.toLowerCase() == role
+      );
       if (timTheoIdVaName) {
         result = timTheoIdVaName;
       }
     } else {
-      const timTheoId = input?.id ? userList.filter((item: any) => item.id == input?.id) : null;
-      const timTheoName = input?.username ? userList.filter((item: any) => item.username === input?.username) : null;
-      const timTheoRole = role ? userList.filter((item: any) => item.role.toLowerCase() == role) : null;
+      const timTheoId = input?.id
+        ? userList.filter((item: any) => item.id == input?.id)
+        : null;
+      const timTheoName = input?.username
+        ? userList.filter((item: any) => item.username === input?.username)
+        : null;
+      const timTheoRole = role
+        ? userList.filter((item: any) => item.role.toLowerCase() == role)
+        : null;
       result = timTheoId || timTheoName || timTheoRole;
     }
     setSearchList(result);
@@ -141,8 +152,6 @@ const ManageUser = () => {
   };
   let firstPage = pagination.firstPage;
   let lastPage = pagination.lastPage;
-
-  console.log(lastPage, "lastPage");
 
   const onPagination = (status: string) => {
     if (status === "next") {
@@ -161,8 +170,6 @@ const ManageUser = () => {
       }
     }
   };
-  console.log(pagination, "pagination");
-
   const renderList = searchList !== null ? searchList : userList;
 
   return (
@@ -218,11 +225,23 @@ const ManageUser = () => {
         <h1 className="text-center">Manage User</h1>
         <div className="mb-[12px] flex">
           <div>
-            <Input value={input?.id} onChange={(e: string) => getInput("id", e)} placeHolder="ID" className="mb-[12px]" />
-            <Input value={input?.username} onChange={(e: string) => getInput("username", e)} placeHolder="Username" />
+            <Input
+              value={input?.id}
+              onChange={(e: string) => getInput("id", e)}
+              placeHolder="ID"
+              className="mb-[12px]"
+            />
+            <Input
+              value={input?.username}
+              onChange={(e: string) => getInput("username", e)}
+              placeHolder="Username"
+            />
           </div>
           <div>
-            <select className="border-[1px] border-[gray] rounded-[20px] ml-[30px] px-[20px] py-[10px]" onChange={(e) => setRole(e.target.value)}>
+            <select
+              className="border-[1px] border-[gray] rounded-[20px] ml-[30px] px-[20px] py-[10px]"
+              onChange={(e) => setRole(e.target.value)}
+            >
               <option disabled selected={role == ""}>
                 Select
               </option>
@@ -234,10 +253,16 @@ const ManageUser = () => {
         </div>
         <div className="flex justify-between mt-[20px]">
           <div className="flex items-center">
-            <Button className="bg-primary1 text-white mr-[12px]" onClick={onSearch}>
+            <Button
+              className="bg-primary1 text-white mr-[12px]"
+              onClick={onSearch}
+            >
               Search
             </Button>
-            <Button className="bg-red text-white" onClick={resetListToInitialState}>
+            <Button
+              className="bg-red text-white"
+              onClick={resetListToInitialState}
+            >
               Clear
             </Button>
           </div>
@@ -257,7 +282,9 @@ const ManageUser = () => {
           <p onClick={() => onPagination("prev")} className="cursor-pointer">
             {"<"} Prev
           </p>
-          <p className="mx-[20px]">{pagination?.firstPage + "/" + pagination?.lastPage}</p>
+          <p className="mx-[20px]">
+            {pagination?.firstPage + "/" + pagination?.lastPage}
+          </p>
           <p onClick={() => onPagination("next")} className="cursor-pointer">
             Next {">"}
           </p>
@@ -272,40 +299,44 @@ const ManageUser = () => {
               <th>Role</th>
               <th>Action</th>
             </tr>
-            {renderList?.slice(pagination?.firstPage, pagination?.lastPage)?.map((item: any, index: number) => (
-              <tr>
-                <td>{index + 1 + firstPage}</td>
-                <td>{item.id}</td>
-                <td>{item.username}</td>
-                <td>{item.role}</td>
-                <td>
-                  <div className="flex items-center justify-center">
-                    <Button
-                      onClick={() =>
-                        setDeleteModal({
-                          data: item,
-                          status: true,
-                        })
-                      }
-                      className="bg-red text-white mr-[12px]"
-                    >
-                      Delete
-                    </Button>
-                    <Button
-                      className="bg-primary1 text-white mr-[12px]"
-                      onClick={() =>
-                        setEditModal({
-                          data: item,
-                          status: true,
-                        })
-                      }
-                    >
-                      Edit
-                    </Button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {renderList
+              ?.slice(pagination?.firstPage, pagination?.lastPage)
+              ?.map((item: any, index: number) => {
+                return (
+                  <tr>
+                    <td>{index + 1}</td>
+                    <td>{item.id}</td>
+                    <td>{item.username}</td>
+                    <td>{item.role}</td>
+                    <td>
+                      <div className="flex items-center justify-center">
+                        <Button
+                          onClick={() =>
+                            setDeleteModal({
+                              data: item,
+                              status: true,
+                            })
+                          }
+                          className="bg-red text-white mr-[12px]"
+                        >
+                          Delete
+                        </Button>
+                        <Button
+                          className="bg-primary1 text-white mr-[12px]"
+                          onClick={() =>
+                            setEditModal({
+                              data: item,
+                              status: true,
+                            })
+                          }
+                        >
+                          Edit
+                        </Button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
           </table>
         </div>
       </div>
