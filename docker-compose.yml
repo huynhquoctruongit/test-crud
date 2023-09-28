@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  fe:
+    container_name: fe
+    build: .
+    ports:
+      - 4173
+    networks:
+      - lms
+
+networks:
+  lms:
+    external: true
+    name: lms
